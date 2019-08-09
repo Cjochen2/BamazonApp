@@ -34,9 +34,8 @@ function start() {
     }
     order();
   });
+};
 
-
-}
 
 function order() {
   connection.query('SELECT * FROM products', function (err, res) {
@@ -58,11 +57,11 @@ function order() {
       .then(function (answer) {
 
         var chosenItem = res[parseInt(answer.choice) - 1];
-    
+
         if (parseInt(chosenItem.stock_quanity) < parseInt(answer.quantity)) {
           console.log('Insufficent Quanity for your order')
         } else {
-        
+
           connection.query(
             'UPDATE products SET ? WHERE ?',
             [
@@ -73,9 +72,11 @@ function order() {
                 item_id: chosenItem.item_id
               }
             ],
+
             function (error) {
               if (error) throw (error);
-              console.log('\nYour order has been successfully placed' + '\nYour total is: ' + chosenItem.price * answer.quantity)
+              console.log('\nYour order has been successfully placed' + '\nYour total is: ' + chosenItem.price * answer.quantity);
+              cont();
             }
           );
         }
@@ -85,27 +86,23 @@ function order() {
 };
 
 
+function cont() {
+  inquirer
+    .prompt(
+      {
+        name: 'continue',
+        type: 'confirm',
+        message: 'Would you like to make another purchase?'
+      },
 
+    )
+    .then(function (answer) {
+      if (answer.continue === true) {
+        start();
+      } else {
+        console.log('Thank you for shopping at Bamazon! Have a great day.')
+        connection.end();
+      }
+    });
 
-
-
-
-// inquirer
-// .prompt([{
-//   name: 'choice',
-//   type: 'rawlist',
-//   choices: function(){
-//     var choiceArray = [];
-//     for(var i = 0; i < res.length; i++){
-//       choiceArray.push(res[i].product_name)
-//     }
-//     return choiceArray;
-//   },
-//   message:'Please select the item you wish to purchase'
-// },
-// {
-//   name: 'quantity',
-//   type: 'input',
-//   message: 'How many would you like to buy?'
-// }
-// ])
+};
