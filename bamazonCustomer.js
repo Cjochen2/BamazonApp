@@ -58,15 +58,15 @@ function order() {
 
         var chosenItem = res[parseInt(answer.choice) - 1];
 
-        if (parseInt(chosenItem.stock_quanity) < parseInt(answer.quantity)) {
-          console.log('Insufficent Quanity for your order')
+        if (parseInt(chosenItem.stock_quantity) < parseInt(answer.quantity)) {
+          console.log('Insufficent Quantity for your order')
         } else {
 
           connection.query(
             'UPDATE products SET ? WHERE ?',
             [
               {
-                stock_quanity: parseInt(chosenItem.stock_quanity) - parseInt(answer.quantity)
+                stock_quantity: parseInt(chosenItem.stock_quantity) - parseInt(answer.quantity)
               },
               {
                 item_id: chosenItem.item_id

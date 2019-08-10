@@ -45,9 +45,10 @@ function start() {
                 case 'Add to inventory':
                     add();
                     break;
-                // case 'Add new product':
-                //     console.log('NEWWWWW');
-                //     break;
+                case 'Add new product':
+                    console.log('This Feature is not yet Functional');
+                    start();
+                    break;
                 case 'All done':
                     connection.end();
                     break;
@@ -62,7 +63,7 @@ function view() {
     connection.query('SELECT * FROM products', function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
-            console.log('Item ID: ' + res[i].item_id + ' || Product: ' + res[i].product_name + ' || Department: ' + res[i].department_name + ' || Price: $' + res[i].price + ' || In-Stock: ' + res[i].stock_quanity);
+            console.log('Item ID: ' + res[i].item_id + ' || Product: ' + res[i].product_name + ' || Department: ' + res[i].department_name + ' || Price: $' + res[i].price + ' || In-Stock: ' + res[i].stock_quantity);
         }
 
         start();
@@ -72,10 +73,10 @@ function view() {
 };
 
 function low() {
-    connection.query('SELECT * FROM products WHERE stock_quanity < 5', function (err, res) {
+    connection.query('SELECT * FROM products WHERE stock_quantity < 5', function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
-            console.log('\nItem ID: ' + res[i].item_id + ' || Product: ' + res[i].product_name + ' || Department: ' + res[i].department_name + ' || Price: $' + res[i].price + ' || In-Stock: ' + res[i].stock_quanity);
+            console.log('\nItem ID: ' + res[i].item_id + ' || Product: ' + res[i].product_name + ' || Department: ' + res[i].department_name + ' || Price: $' + res[i].price + ' || In-Stock: ' + res[i].stock_quantity);
         }
 
         start();
@@ -103,7 +104,7 @@ function add() {
                     message: "What item would you like to restock?"
                 },
                 {
-                    name:'quanity',
+                    name:'quantity',
                     type: 'input',
                     message: 'How many would you like to purchase?'
                 }
@@ -120,7 +121,7 @@ function add() {
                 connection.query('UPDATE products SET ? WHERE ?',
                 [
                     {
-                        stock_quanity: chosenItem.stock_quanity + parseInt(answer.quanity)
+                        stock_quantity: chosenItem.stock_quantity + parseInt(answer.quantity)
                     },
                     {
                         item_id: chosenItem.item_id
@@ -128,7 +129,7 @@ function add() {
                 ],
                 function (error) {
                     if (error) throw (error);
-                    console.log('\nYour order has been successfully placed' + '\nStock Quanity is: ' + (chosenItem.stock_quanity + parseInt(answer.quanity)));
+                    console.log('\nYour order has been successfully placed' + '\nStock Quantity is: ' + (chosenItem.stock_quantity + parseInt(answer.quantity)));
                     start();
                   }
                 )

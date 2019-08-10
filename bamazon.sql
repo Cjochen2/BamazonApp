@@ -8,11 +8,11 @@ CREATE TABLE products(
   product_name VARCHAR(100) NOT NULL,
   department_name VARCHAR(100) NOT NULL,
   price decimal(10,2) default 0,
-  stock_quanity INT default 0,
+  stock_quantity INT default 0,
   PRIMARY KEY (item_id)
 );
 
-INSERT INTO products (product_name, department_name, price, stock_quanity)
+INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Wireless Headphones", "Electronics", 149.99, 100), 
 ("Digital Kitchen Scale", "Home and Kitchen", 29.99, 36), 
 ("Hockey Stick", "Sporting Goods", 279.99, 10),
