@@ -45,9 +45,9 @@ function start() {
                 case 'Add to inventory':
                     add();
                     break;
-                case 'Add new product':
-                    console.log('NEWWWWW');
-                    break;
+                // case 'Add new product':
+                //     console.log('NEWWWWW');
+                //     break;
                 case 'All done':
                     connection.end();
                     break;
@@ -87,7 +87,7 @@ function low() {
 function add() {
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
-        // once you have the items, prompt the user for which they'd like to bid on
+        
         inquirer
             .prompt([
                 {
@@ -103,28 +103,36 @@ function add() {
                     message: "What item would you like to restock?"
                 },
                 {
-                    name:'quantiy',
+                    name:'quanity',
                     type: 'input',
                     message: 'How many would you like to purchase?'
                 }
             ])
             .then(function (answer){
-                var chosenItem = chosen;
+                var chosenItem;
                 for(var i = 0; i < results.length; i++) {
                     if (results[i].product_name === answer.choice){
-                        var chosen = results[i];
+                        chosenItem = results[i];
+                        
                     }
                 }
                 console.log(chosenItem);
-                // connection.query('UPDATE products SET ? WHERE ?'
-                // [
-                //     {
-                //         stock_quanity: chosenItem.stock_quantity + parseInt(answer.quantity)
-                //     },
-                //     {
-                //         item_id: chosenItem.item_id
-                //     }
-                // ])
+                connection.query('UPDATE products SET ? WHERE ?',
+                [
+                    {
+                        stock_quanity: chosenItem.stock_quanity + parseInt(answer.quanity)
+                    },
+                    {
+                        item_id: chosenItem.item_id
+                    }
+                ],
+                function (error) {
+                    if (error) throw (error);
+                    console.log('\nYour order has been successfully placed' + '\nStock Quanity is: ' + (chosenItem.stock_quanity + parseInt(answer.quanity)));
+                    start();
+                  }
+                )
+                
             })
     }
     )
