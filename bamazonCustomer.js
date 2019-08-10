@@ -59,7 +59,8 @@ function order() {
         var chosenItem = res[parseInt(answer.choice) - 1];
 
         if (parseInt(chosenItem.stock_quantity) < parseInt(answer.quantity)) {
-          console.log('Insufficent Quantity for your order')
+          console.log('Insufficent Quantity for your order');
+          cont();
         } else {
 
           connection.query(

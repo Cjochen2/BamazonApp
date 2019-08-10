@@ -117,7 +117,7 @@ function add() {
                         
                     }
                 }
-                console.log(chosenItem);
+            
                 connection.query('UPDATE products SET ? WHERE ?',
                 [
                     {
