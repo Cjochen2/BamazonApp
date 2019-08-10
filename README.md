@@ -12,25 +12,23 @@ Prior to using Bamazon you will need to install the following npm packages and p
 
    * [mySQL](https://www.npmjs.com/package/mysql)
 
-   * 
-
 ## Customer Interface:
 
-![Customer1](/images/customer1.JPG)
+![Customer1](/Images/customer1.JPG)
 
 In the above image you can see how the app flows. Upon initilization the user is presented with a list of available items and asked to enter the Item ID and how many of the item they wish to purchase. The application then checks to make sure there are enough in stock. If there are enough Items the app completes the order and prints out a total cost to the customer and prompts to see if the customer would like to make another purchase. If not the connection terminates.
 
-![Customer2](/images/customer2.JPG)
+![Customer2](/Images/customer2.JPG)
 
 In this second image you can see the flow of events if the customers order exceeds the stock quanity. The application informs the customer and then asks if they would like to make another purchase. In this example the customer then tries to make the same purchase using a smaller order and is successful.
 
 ## Manager Interface:
 
-![Manager1](/images/Manager1.JPG)
+![Manager1](/Images/Manager1.JPG)
 
 In the above image a manager initializes the application and is presented with a list of options. The manager selects what they would like to do from the list. In this case they elect to view the inventory and after viewing terminate the application.
 
-![Manager2](/images/manager2.JPG)
+![Manager2](/Images/manager2.JPG)
 
 In this example the manager elects to view specifically low invetory items which is qualified as anything below 5. After seeing the low inventory the manager is prompted to see if they wish to do anything else. Here the manager decided to purchase more inventory. The application updates the stock quanity and then loops again. The manager then terminates the application.
 
