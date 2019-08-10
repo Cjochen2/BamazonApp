@@ -4,7 +4,7 @@ Welcome to Bamazon!
 
 Bamazon is a simulation of a store interface utilizing a mySQL Database to make purhcases by customers and track inventory and product for managers. Below is a demonstration of how each feature works. To go more in depth select the bamazonCustomer.js file to get started.
 
-Prior to using Bamazon you will need to install the following npm packages and provide your own .env file with a password to access your mySQL database.
+Prior to using Bamazon you will need to install the following npm packages and provide your own .env file with a password to access your mySQL database. You will also need access to mySQL and have intialized a database using the bamazon.sql schema.
 
    * [Express](https://www.npmjs.com/package/express)
 
